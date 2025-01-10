@@ -273,7 +273,7 @@ def refine_chembl_database(log, dataPath, destinationPath, compression='brotli')
         elapsed_time = time.time() - time_s
         print(f"ChEMBL file processing completed in {elapsed_time:.2f} seconds.", file=log)
    
-def refine_NPs_data(log, dataPath, destinationPath, compression='brotli'):
+def refine_NPs_data(log, dataPath, destinationPath, verbose, compression='brotli'):
     """
     Refine the NPs data and save as parquet files.
     
@@ -298,7 +298,7 @@ def refine_NPs_data(log, dataPath, destinationPath, compression='brotli'):
         # Process each row to clean SMILES using multiprocessing
         print(f"Processing NPs data for SMILES cleaning...", file=log)
         cleaned_smi = Parallel(n_jobs=-1, backend="multiprocessing")(
-            delayed(processMS)(row['identifier'], row['canonical_smiles'], verbose=args.verbose)  
+            delayed(processMS)(row['identifier'], row['canonical_smiles'], verbose=verbose)  
             for _, row in tqdm.tqdm(NPs.iterrows(), total=len(NPs), desc="NPs processMS")
         )
 
