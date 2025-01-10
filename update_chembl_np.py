@@ -104,7 +104,7 @@ if __name__ == "__main__":
     # Process and refine the NPs data, saving the output as Parquet files
     if args.NPs:
         if args.NPs_dataPath:
-            refine_NPs_data(log, args.NPs_dataPath, args.destinationPath)
+            refine_NPs_data(log, args.NPs_dataPath, args.destinationPath, args.verbose)
         else:
             print("Please provide the CSV file with the latest NPs data using the --NPs_data option.")
 
